@@ -51,6 +51,7 @@ function proto.dissector(buffer, pinfo, tree)
     local len = buffer:len()
     if len < 10 then return end
 
+    -- TODO: fix to use little endian for correct device number
     pinfo.cols.info = "[" .. buffer(10, 2):uint() .. "] " .. ant_msg_type(buffer(12, 1):uint())
 
     local subtree = tree:add(proto, buffer(), "ANT+ Broadcast Message")
