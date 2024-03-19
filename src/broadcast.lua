@@ -42,8 +42,10 @@ local function ant_msg_type(t)
         return "power"
     elseif t == 0x79 then
         return "speed & cadence"
+    elseif t == 0x7C then
+        return "stride based speed & distance"
     end
-    return ""
+    return t
 end
 
 function proto.dissector(buffer, pinfo, tree)
@@ -52,7 +54,7 @@ function proto.dissector(buffer, pinfo, tree)
     if len < 10 then return end
 
     -- TODO: fix to use little endian for correct device number
-    pinfo.cols.info = "[" .. buffer(10, 2):uint() .. "] " .. ant_msg_type(buffer(12, 1):uint())
+    pinfo.cols.info = "[" .. buffer(10, 2):le_uint() .. "] " .. ant_msg_type(buffer(12, 1):uint())
 
     local subtree = tree:add(proto, buffer(), "ANT+ Broadcast Message")
 

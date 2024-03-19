@@ -26,13 +26,12 @@ function proto.dissector(buffer, pinfo, tree)
     local len = buffer:len()
     if len ~= 8 then return end
 
-    local cadence = buffer(3, 1):uint()
-    --pinfo.cols.info = " PWR " .. cadence .. "rpm"
-
     local subtree = tree:add(proto, buffer(), "ANT+ Power Message")
 
     -- DATA PAGE NUMBER
     subtree:add(page, buffer(0, 1))
+
+    if buffer(0, 1):uint() ~= 0x10 then return end
 
     -- EVENT COUNT
     subtree:add(event_count, buffer(1, 1))

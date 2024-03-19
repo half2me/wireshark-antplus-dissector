@@ -1,5 +1,5 @@
 ## Wireshark dissector for the [ANT+](https://www.thisisant.com/developer/ant-plus/ant-antplus-defined) Protocol
-This dissector can be used to analyze ANT+ data captured from a usb device.
+This dissector can be used to analyze ANT+ data captured from a usb device. Note: this is still a work in progress, and as such is expected to contain incomplete profiles.
 
 ## Building and Installing
 
