@@ -1,7 +1,7 @@
 -- ANT+ Fitness Message
-local proto = Proto("antplus_fitness_message", "ANT+ Fitness Message")
+local proto = Proto("antplus_fe_message", "ANT+ FE Message")
 
-local page  = ProtoField.uint8("antplus_fitness_message.page", "Data Page Number", base.HEX)
+local page  = ProtoField.uint8("antplus_fe_message.page", "Data Page Number", base.HEX)
 
 
 proto.fields = {
@@ -13,7 +13,7 @@ function proto.dissector(buffer, pinfo, tree)
     local len = buffer:len()
     if len ~= 8 then return end
 
-    local subtree = tree:add(proto, buffer(), "ANT+ Fitness Message")
+    local subtree = tree:add(proto, buffer(), "ANT+ FE Message")
 
     -- DATA PAGE NUMBER
     local pageNum = buffer(0, 1):uint()

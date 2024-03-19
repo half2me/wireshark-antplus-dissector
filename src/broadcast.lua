@@ -39,13 +39,13 @@ local EXT_FLAG_TIMESTAMP  = 0x20
 
 local function ant_msg_type(t)
     if t == 0x0B then
-        return "power"
+        return "ANT+ PWR"
     elseif t == 0x79 then
-        return "speed & cadence"
+        return "ANT+ S&C"
     elseif t == 0x7C then
-        return "stride based speed & distance"
+        return "ANT+ SDM"
     elseif t == 0x11 then
-        return "fitness"
+        return "ANT+ FE"
     end
     return t
 end
