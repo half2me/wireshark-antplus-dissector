@@ -28,6 +28,14 @@ function proto.dissector(buffer, pinfo, tree)
     local pageNum = buffer(0, 1):uint()
     subtree:add(page, buffer(0, 1))
 
+    if pageNum == 1 or pageNum == 2 then
+        -- Instantaneous Speed
+        subtree:add(
+            instantaneous_speed, buffer(4, 2),
+            bit.band(buffer(4, 1):uint(), 0x0F) + buffer(5, 1):uint() / 256
+        )
+    end
+
     if pageNum == 0x01 then
         -- Time
         subtree:add(
@@ -39,12 +47,6 @@ function proto.dissector(buffer, pinfo, tree)
         subtree:add(
             cumulative_distance, buffer(3, 2),
             buffer(3, 1):uint() + bit.rshift(buffer(4, 1):uint(), 4) / 16
-        )
-
-        -- Instantaneous Speed
-        subtree:add(
-            instantaneous_speed, buffer(4, 2),
-            bit.band(buffer(4, 1):uint(), 0x0F) + buffer(5, 1):uint() / 256
         )
 
         -- Cumulative Stride Count

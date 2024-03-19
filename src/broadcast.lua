@@ -44,6 +44,8 @@ local function ant_msg_type(t)
         return "speed & cadence"
     elseif t == 0x7C then
         return "stride based speed & distance"
+    elseif t == 0x11 then
+        return "fitness"
     end
     return t
 end
